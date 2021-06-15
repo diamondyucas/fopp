@@ -98,6 +98,31 @@ their lifetimes expire when the function returns to the caller.
       :.*: Incorrect, try again.
 
 .. mchoice:: question11_7_3
+   :answer_a: 4
+   :answer_b: 6
+   :answer_c: 10
+   :answer_d: Code will give an error because x and z do not match.
+   :correct: a
+   :feedback_a: Correct, the output is right because the subtract function takes in x as the global variable for the z parameter and puts it into the function. The subtract function uses the local variable y for its return.
+   :feedback_b: Incorrect, look again at what is being produced in the subtract function.
+   :feedback_c: Incorrect, look again at what is being produced in the subtract function.
+   :feedback_d: Incorrect, there shouldn't be any error.
+   :practice: T
+
+   What would be the result of running the following code?
+
+   .. sourcecode:: python
+
+     x = 3 * 2
+     y = 1
+
+     def subtract(z):
+         y = 10
+         return y - z
+        
+     print(subtract(x)) 
+
+.. mchoice:: question11_7_4
    :answer_a: 33
    :answer_b: 12
    :answer_c: There is an error in the code.
@@ -107,7 +132,7 @@ their lifetimes expire when the function returns to the caller.
    :feedback_c: Yes! There is an error because we reference y in the producing function, but it was defined in adding. Because y is a local variable, we can't use it in both functions without initializing it in both. If we initialized y as 3 in both though, the answer would be 33.
    :practice: T
 
-   What is the result of the following code?
+   What would be the result of running the following code?
 
    .. sourcecode:: python
 
@@ -121,3 +146,57 @@ their lifetimes expire when the function returns to the caller.
          return z
 
      print(producing(adding(4)))
+
+.. mchoice:: question11_7_5
+   :answer_a: 1
+   :answer_b: 9
+   :answer_c: 10
+   :answer_d: Error, local variable 'x' is referenced before assignment.
+   :correct: d 
+   :feedback_a: Incorrect, pay attention to the local scope in the function.
+   :feedback_b: Incorrect, pay attention to the local scope in the function.
+   :feedback_c: Incorrect, pay attention to the local scope in the function.
+   :feedback_d: This code gives an error because the local variable 'x' was referenced in the local scope before it was assigned a value.  
+    
+   What would be the result of running the following code?
+
+   .. sourcecode:: python
+
+     x = 9
+
+     def adding():
+         x+=1
+         print(x)
+    
+     adding()
+
+
+
+   
+.. code-block:: python
+
+        v1 += 1
+    Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+    NameError: name 'v1' is not defined
+        def foo():
+            v1 += 1
+        foo()
+    Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+        File "<stdin>", line 2, in foo
+    UnboundLocalError: local variable 'v1' referenced before assignment
+
+
+In the code above, notice and understand the different error messages. 
+The local variables are created at the same time the local namespace 
+is created. That is **any** variable that is assigned to anywhere 
+in the function gets added to the local namespace immediately but 
+it will remain **unbound** until the assignment statement is executed.
+
+
+
+
+
+
+
